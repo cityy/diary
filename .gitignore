@@ -1,8 +1,9 @@
 .gitignore
 /__pycache__
 /data
-/data_lists
+/data-lists
 /output
 /test
+/migration
 /assets/fonts/bell-gothic-black
 *.pyc

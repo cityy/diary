@@ -13,9 +13,8 @@ encoding = locale.getpreferredencoding(True)
 import importlib.util
 
 # custom script to generate stats
-spec = importlib.util.spec_from_file_location("generateSTATS", "../00_tools/generateSTATS.py")
-generateSTATS = importlib.util.module_from_spec(spec)
-encoding = locale.getpreferredencoding(True)
+spec = importlib.util.spec_from_file_location("generateSTATS", "./gen_HTML_stats.py")
+gen_STATS = importlib.util.module_from_spec(spec)
 
 imageFormats = ['jpg', 'gif']
 bookList = []
@@ -25,7 +24,7 @@ authorList = []
 
 # add print backup support (generate pdfs ? make it a book?)
 
-file = open('../index.html', 'wb')
+file = open('./output/index.html', 'wb')
 
 doc, tag, text = Doc().tagtext()
 
@@ -38,9 +37,9 @@ with tag('html', lang='en'):
 		with tag('title'):
 			text('CATALOGUE OF CITATIONS')
 		doc.stag('meta', name='viewport', content='width=device-width, initial-scale=1')
-		doc.stag('link', rel='stylesheet', href='./lib/bootstrap-4.0.0/bootstrap-grid.min.css')
-		doc.stag('link', rel='stylesheet', href='./css/style.css')
-		doc.line('script', '', type='text/javascript', src='./js/interaction.js')
+		doc.stag('link', rel='stylesheet', href='../assets/lib/bootstrap-4.0.0/bootstrap-grid.min.css')
+		doc.stag('link', rel='stylesheet', href='../assets/css/style.css')
+		doc.line('script', '', type='text/javascript', src='../assets/js/interaction.js')
 
 		with tag('body'):
 			with tag('div', klass='container-fluid'):
@@ -48,16 +47,16 @@ with tag('html', lang='en'):
 					with tag('div', id='dictFilter', klass='col-3'):
 						doc.line('span', 'Literature', style='margin-top:0;')
 						with tag('form'):
-							if(os.path.isfile('../lists/bookList.txt')):
-								with open('../lists/bookList.txt', 'rt') as bookList_file:
+							if(os.path.isfile('./data-lists/bookList.txt')):
+								with open('./data-lists/bookList.txt', 'rt') as bookList_file:
 									for book in bookList_file:
 										with tag('div', klass='tagWrapper'):
 											doc.line('span', book, klass='filterTag', type='book', value=book.lower().replace('\n', ''))
 									bookList_file.close()
 						doc.line('span', 'Authors')
 						with tag('form'):
-							if(os.path.isfile('../lists/authorList.txt')):
-								with open('../lists/authorList.txt', 'rt') as authorList_file:
+							if(os.path.isfile('./data-lists/authorList.txt')):
+								with open('./data-lists/authorList.txt', 'rt') as authorList_file:
 									for author in authorList_file:
 										authorPrint = author.split(',')[0]
 										with tag('div', klass='tagWrapper'):
@@ -65,8 +64,8 @@ with tag('html', lang='en'):
 									authorList_file.close()
 						doc.line('span', 'Tags')
 						with tag('form'):
-							if(os.path.isfile('../lists/tagList.txt')):
-								with open('../lists/tagList.txt', 'rt') as tagList_file:
+							if(os.path.isfile('./data-lists/tagList.txt')):
+								with open('./data-lists/tagList.txt', 'rt') as tagList_file:
 									for tagItem in tagList_file:
 										#doc.line('input', tagItem, type='checkbox', value=tagItem.replace(' ', '-'))
 										with tag('div', klass='tagWrapper'):
@@ -78,20 +77,21 @@ with tag('html', lang='en'):
 						with tag('div', klass='tagWrapper'):
 							doc.line('span', 'List', klass='viewTag', id='listViewToggle')
 							doc.line('span', 'Field', klass='viewTag active', id='fieldViewToggle')
-					for letter in os.listdir("../dict/"):
+					for letter in os.listdir("./data/"):
 						with tag('div', klass='dictLetter col'):
 							text(letter)
-						for word in os.listdir("../dict/" + letter):
+						for word in os.listdir("./data/" + letter):
 							#print(bytes(word, 'utf-8'))
 							wordCount = 0
-							for citation in os.listdir("../dict/" + letter + "/" + word):
-								if( str("../dict/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
+							for citation in os.listdir("./data/" + letter + "/" + word):
+								if( str("./data/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
 									wordCount += 1
-									with open("../dict/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
+									with open("./data/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
 										thisCitation = dict()
 										thisCitationBook = ''
 										thisCitationAuthor = ''
 										thisCitationTags = ''
+										print( citation )
 										for key,value in csv.reader(citation_csv, delimiter='|'):
 											thisCitation[key] = value
 											if(key == 'author'):
@@ -118,11 +118,12 @@ with tag('html', lang='en'):
 															if (len(thisCitation["text"]) > 0):
 																with tag('a', href=thisCitation["text"]):
 																	text(thisCitation["text"].split('.')[-1].upper())
+														# this is old image behaviour
 														if("quote" in thisCitation):
 															if (thisCitation['quote'] == 'img'):
 																for imgFormat in imageFormats:
-																	if( os.path.isfile( "../dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
-																		doc.stag('img', src="./dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat))
+																	if( os.path.isfile( "./data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
+																		doc.stag('img', src="../data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat))
 															else:
 																text( thisCitation['quote'] )
 														with tag('span',klass='credits'):
@@ -174,15 +175,15 @@ for i,tagSingle in enumerate(tagList):
 	tagList[i] = tagSingle + ' ' + str(count)
 
 
-bookList_file = open('../lists/bookList.txt', 'wt');
+bookList_file = open('./data-lists/bookList.txt', 'wt');
 for book in bookList:
 	bookList_file.write(book + '\n')
 
-authorList_file = open('../lists/authorList.txt', 'wt');
+authorList_file = open('./data-lists/authorList.txt', 'wt');
 for author in authorList:
 	authorList_file.write(author + '\n')
 
-tagList_file = open('../lists/tagList.txt', 'wt');
+tagList_file = open('./data-lists/tagList.txt', 'wt');
 for tagItem in tagList:
 	tagList_file.write(tagItem + '\n')
 
@@ -192,4 +193,4 @@ file.write(indent(doc.getvalue(), newline = '\r\n').encode() )
 #file.write(doc.getvalue())
 file.close()
 
-spec.loader.exec_module(generateSTATS)
+spec.loader.exec_module(gen_STATS)

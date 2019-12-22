@@ -4,10 +4,9 @@ from PyQt5 import QtWidgets, QtGui, QtCore, Qt
 import importlib.util
 
 # custom script to create the entry csv
-spec = importlib.util.spec_from_file_location("entryMaker", "../00_tools/entryMaker.py")
+spec = importlib.util.spec_from_file_location("entryMaker", "./core_entryMaker.py")
 entryMaker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(entryMaker)
-
 
 # for high dpi displays
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)

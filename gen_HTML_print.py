@@ -30,7 +30,7 @@ def flattenList(list):
 # add pdf support
 # add print backup support (generate pdfs ? make it a book?)
 
-file = open('../print.html', 'wb')
+file = open('./output/print.html', 'wb')
 
 doc, tag, text = Doc().tagtext()
 
@@ -43,24 +43,24 @@ with tag('html', lang='en'):
 		with tag('title'):
 			text('CATALOGUE OF CITATIONS')
 		doc.stag('meta', name='viewport', content='width=device-width, initial-scale=1')
-		doc.stag('link', rel='stylesheet', href='./lib/bootstrap-4.0.0/bootstrap-grid.min.css')
-		doc.stag('link', rel='stylesheet', href='./css/print.css')
-		doc.line('script', '', type='text/javascript', src='./js/interaction.js')
+		doc.stag('link', rel='stylesheet', href='./assets/lib/bootstrap-4.0.0/bootstrap-grid.min.css')
+		doc.stag('link', rel='stylesheet', href='./assets/css/print.css')
+		doc.line('script', '', type='text/javascript', src='./assets/js/interaction.js')
 
 		with tag('body'):
 					# with tag('div', id='dictFilter', klass='col-3'):
 					# 	doc.line('span', 'Literature', style='margin-top:0;')
 					# 	with tag('form'):
-					# 		if(os.path.isfile('../lists/bookList.txt')):
-					# 			with open('../lists/bookList.txt', 'rt') as bookList_file:
+					# 		if(os.path.isfile('./data-lists/bookList.txt')):
+					# 			with open('./data-lists/bookList.txt', 'rt') as bookList_file:
 					# 				for book in bookList_file:
 					# 					with tag('div', klass='tagWrapper'):
 					# 						doc.line('span', book, klass='filterTag', type='book', value=book.lower().replace('\n', ''))
 					# 				bookList_file.close()
 					# 	doc.line('span', 'Authors')
 					# 	with tag('form'):
-					# 		if(os.path.isfile('../lists/authorList.txt')):
-					# 			with open('../lists/authorList.txt', 'rt') as authorList_file:
+					# 		if(os.path.isfile('./data-lists/authorList.txt')):
+					# 			with open('./data-lists/authorList.txt', 'rt') as authorList_file:
 					# 				for author in authorList_file:
 					# 					authorPrint = author.split(',')[0]
 					# 					with tag('div', klass='tagWrapper'):
@@ -68,8 +68,8 @@ with tag('html', lang='en'):
 					# 				authorList_file.close()
 					# 	doc.line('span', 'Tags')
 					# 	with tag('form'):
-					# 		if(os.path.isfile('../lists/tagList.txt')):
-					# 			with open('../lists/tagList.txt', 'rt') as tagList_file:
+					# 		if(os.path.isfile('./data-lists/tagList.txt')):
+					# 			with open('./data-lists/tagList.txt', 'rt') as tagList_file:
 					# 				for tagItem in tagList_file:
 					# 					#doc.line('input', tagItem, type='checkbox', value=tagItem.replace(' ', '-'))
 					# 					with tag('div', klass='tagWrapper'):
@@ -84,17 +84,17 @@ with tag('html', lang='en'):
 
 			citlist = []
 			entryCounter = 0;
-			for letter in os.listdir("../dict/"):
+			for letter in os.listdir("./data/"):
 				entryCounter += 1;
 				thisCitation = dict()
 				thisCitation['word'] = letter
 				thisCitation['pageNr'] = entryCounter
 				citlist.append(thisCitation)
-				for word in os.listdir("../dict/" + letter):
-					for citation in os.listdir("../dict/" + letter + "/" + word):
+				for word in os.listdir("./data/" + letter):
+					for citation in os.listdir("./data/" + letter + "/" + word):
 						thisCitation = dict()
-						if( str("../dict/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
-							with open("../dict/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
+						if( str("./data/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
+							with open("./data/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
 								entryCounter += 1;
 								thisCitation['pageNr'] = entryCounter
 								thisCitation['letter'] = letter
@@ -107,8 +107,8 @@ with tag('html', lang='en'):
 									thisCitation[key] = ''.join(value.split('+')[0]).lower()
 								if(thisCitation['quote'] == 'img'):
 									for imgFormat in imageFormats:
-										if( os.path.isfile( "../dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
-											thisCitation['img'] = "./dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat)
+										if( os.path.isfile( "./data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
+											thisCitation['img'] = "./data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat)
 								citlist.append(thisCitation)
 			
 			duplex = 1
@@ -296,7 +296,7 @@ with tag('html', lang='en'):
 
 
 					#with tag('div', klass='printWrapper'):
-					# for letter in os.listdir("../dict/"):
+					# for letter in os.listdir("./data/"):
 					# 	with tag('div'):
 					# 		if counter == 4:
 					# 			doc.attr(klass='printWrapper')
@@ -304,13 +304,13 @@ with tag('html', lang='en'):
 					# 		with tag('div', klass='dictLetter printCol'):
 					# 			text(letter)
 					# 			counter += 1
-					# 		for word in os.listdir("../dict/" + letter):
+					# 		for word in os.listdir("./data/" + letter):
 					# 			#print(bytes(word, 'utf-8'))
 					# 			wordCount = 0
-					# 			for citation in os.listdir("../dict/" + letter + "/" + word):
-					# 				if( str("../dict/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
+					# 			for citation in os.listdir("./data/" + letter + "/" + word):
+					# 				if( str("./data/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
 					# 					wordCount += 1
-					# 					with open("../dict/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
+					# 					with open("./data/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
 					# 						thisCitation = dict()
 					# 						thisCitationBook = ''
 					# 						thisCitationAuthor = ''
@@ -336,8 +336,8 @@ with tag('html', lang='en'):
 					# 										#print(type(thisCitation['quote'].encode()))
 					# 										if(thisCitation['quote'] == 'img'):
 					# 											for imgFormat in imageFormats:
-					# 												if( os.path.isfile( "../dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
-					# 													doc.stag('img', src="./dict/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat))
+					# 												if( os.path.isfile( "./data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat) )):
+					# 													doc.stag('img', src="./data/" + letter + "/" + word + '/' + citation.replace('csv', imgFormat))
 					# 										else:
 					# 											text( thisCitation['quote'] )
 					# 										with tag('span',klass='credits'):
@@ -389,15 +389,15 @@ for i,tagSingle in enumerate(tagList):
 	tagList[i] = tagSingle + ' ' + str(count)
 
 
-bookList_file = open('../lists/bookList.txt', 'wt');
+bookList_file = open('./data-lists/bookList.txt', 'wt');
 for book in bookList:
 	bookList_file.write(book + '\n')
 
-authorList_file = open('../lists/authorList.txt', 'wt');
+authorList_file = open('./data-lists/authorList.txt', 'wt');
 for author in authorList:
 	authorList_file.write(author + '\n')
 
-tagList_file = open('../lists/tagList.txt', 'wt');
+tagList_file = open('./data-lists/tagList.txt', 'wt');
 for tagItem in tagList:
 	tagList_file.write(tagItem + '\n')
 

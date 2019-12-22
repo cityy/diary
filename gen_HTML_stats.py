@@ -17,7 +17,7 @@ authorList = []
 keywordList = []
 datesList = []
 
-file = open('../stats.html', 'wb')
+file = open('./output/stats.html', 'wb')
 
 doc, tag, text = Doc().tagtext()
 
@@ -30,11 +30,11 @@ doc, tag, text = Doc().tagtext()
 # make horizontal scrolling work
 # day/month/year
 
-for letter in os.listdir("../dict/"):
-	for word in os.listdir("../dict/" + letter):
-		for citation in os.listdir("../dict/" + letter + "/" + word):
-			if( str("../dict/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
-				with open("../dict/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
+for letter in os.listdir("./data/"):
+	for word in os.listdir("./data/" + letter):
+		for citation in os.listdir("./data/" + letter + "/" + word):
+			if( str("./data/" + letter + "/" + word + '/' + citation).endswith('.csv') ):
+				with open("./data/" + letter + "/" + word + '/' + citation, "rt") as citation_csv:
 					keywordList.append(word)
 					thisCitation = dict()
 					thisCitationBook = ''
@@ -91,9 +91,9 @@ with tag('html', lang='en'):
 		with tag('title'):
 			text('CATALOGUE OF CITATIONS STATS')
 		doc.stag('meta', name='viewport', content='width=device-width, initial-scale=1')
-		doc.stag('link', rel='stylesheet', href='./lib/bootstrap-4.0.0/bootstrap-grid.min.css')
-		doc.stag('link', rel='stylesheet', href='./css/stats.css')
-		doc.line('script', '', type='text/javascript', src='./js/interaction_stats.js')
+		doc.stag('link', rel='stylesheet', href='./assets/lib/bootstrap-4.0.0/bootstrap-grid.min.css')
+		doc.stag('link', rel='stylesheet', href='./assets/css/stats.css')
+		doc.line('script', '', type='text/javascript', src='./assets/js/interaction_stats.js')
 
 	with tag('body'):
 		#with tag('div', klass='container-fluid'):
