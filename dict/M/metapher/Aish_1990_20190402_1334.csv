@@ -1,8 +1,0 @@
-author|Aish, Robert
-title|A User Extensible Object-Oriented CAD System
-in|Proceedings of the Object-Oriented Software Engineering Conference
-year|1990
-pages|
-tag|metapher + invers + umgekehrt + kreislauf + zirkulär + realität + fiktion + paradigma + software + real + realität + welt + objekt + computer + annahme + nutzer + modell + entwickler + entwicklung + programm + nachahmen + attribut + verhalten + cad + system + architekt + anwendung + produktion + design + tautologie + tautologisch
-quote|Object oriented software is based on a metaphor between real-world objects and computational objects. A specific assumption is made that a convenient 'user model' for software developers is one which mimics some of the attributes and beaviour of real-world objects. A CAD system is based on the inverse metaphor, that a convenient 'user model' for architects and designers is one where real-world objects (such as buildings) are represented as a computational system. An object-oriented CAD System is therefore a circular metaphor in which OO software concepts, derived from the real world, are re-applied to the design of furhter real world objects. 
-image|
