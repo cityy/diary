@@ -1,0 +1,93 @@
+@font-face{
+	font-family: bell-gothic;
+	src: url('../fonts/bell-gothic-black/BellGothicStd-Black.otf');
+	font-weight: 200;
+}
+
+@font-face{
+	font-family: bell-gothic;
+	src: url('../fonts/bell-gothic-black/BellGothicStd-Light.otf');
+	font-weight: 100;
+}
+
+body{
+	font-family: bell-gothic;
+	font-weight: 200;
+	overflow-x: scroll;
+	min-width:100%;
+	height:100%;
+	width: 100000px;
+}
+
+a, a:visited{
+	color:black;
+}
+
+@media (max-width: 1300px) { 
+	body::-webkit-scrollbar { 
+		width: 0px; 
+		background: transparent;}
+	body{
+		font-size: .7em;}
+}
+
+.chart{
+	min-width: 100%;
+	white-space: nowrap;
+	position: absolute;
+	bottom:2em;
+}
+
+/*.chart::-webkit-scrollbar { 
+	display: none; 
+}*/
+
+.column{
+	min-width:100px;
+	max-width:100px;
+	overflow:hidden;
+	white-space: normal;
+	width: auto;
+	margin: 0 0.2em 0 0;
+	display: inline-block;
+	border-right: 10px solid black;
+}
+
+.column span{
+	margin:0;
+	padding:0;
+	width:90%;
+}
+
+.column span.valueSpan{
+	font-size: .6em;
+	border-bottom: 1px dotted #FFCDCD;
+}
+
+.column span.valueSpan:hover{
+	color:black;
+	background:#FFCDCD;
+	border-color: white;
+	cursor: pointer;
+}
+
+
+.column span.dateSpan{
+	margin-top: 0.5em;
+	font-size: 1em;
+}
+
+.container-fluid{
+	max-width: none;
+}
+
+#options{
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:2em;
+	background: black;
+	color:white;
+	font-weight: 100;
+}

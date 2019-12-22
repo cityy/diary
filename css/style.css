@@ -1,0 +1,158 @@
+@font-face{
+	font-family: bell-gothic;
+	src: url('../fonts/bell-gothic-black/BellGothicStd-Black.otf');
+	font-weight: 200;
+}
+
+@font-face{
+	font-family: bell-gothic;
+	src: url('../fonts/bell-gothic-black/BellGothicStd-Light.otf');
+	font-weight: 100;
+}
+
+body{
+	font-family: bell-gothic;
+	font-weight: 200;
+    overflow-x: hidden;
+}
+
+a, a:visited{
+	color:black;
+}
+
+@media (max-width: 1300px) { 
+	body::-webkit-scrollbar { 
+		width: 0px; 
+		background: transparent;}
+	body{
+		font-size: .7em;}
+}
+
+.dictLetter{
+	background:black;
+	color:white;
+	font-size: 1.75em;
+	padding:1em;
+	padding-top: .5em;
+}
+
+#dictFilter{
+	font-size: 1.2em;
+	padding-top: .5em;
+	overflow-y: scroll;
+	max-height: 600px;
+	padding-bottom: 0.5em;
+}
+
+#dictFilter::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+#dictFilter span{
+	margin-top:.5em;
+	display: block;
+}
+
+#dictFilter .tagWrapper{
+	display:inline-block;
+	margin:-0.1em -0.1em 0 0;
+	font-size: 0.6em;
+}
+
+#dictFilter form span.filterTag, #dictFilter span.viewTag{
+	display:inline;
+	color:black;
+	background-color: white;
+	border:1px solid black;
+	margin: 0;
+	word-wrap: break-word;
+	padding:0.3em;
+	font-weight: 200;
+	cursor: pointer;
+	float:left;
+}
+
+#dictFilter form span.filterTag.active, #dictFilter span.viewTag.active{
+	background-color: black;
+	color:white;
+}
+
+#dictFilter span.countTag{
+	float:left;
+	text-align: center;
+	display:inline;
+	color:white;
+	background-color: black;
+	border:1px solid black;
+	border-left:0;
+	margin: 0;
+	word-wrap: break-word;
+	padding:0.3em;
+	font-weight: 200;
+	cursor: pointer;
+}
+
+.dictWord{
+	font-size: 1.75em;
+	padding-top:.5em;
+}
+
+.col-24, .col-12, .col-6{
+	max-height: 2em;
+	font-size: 1em;
+	overflow:hidden;
+}
+
+.activeCol{
+	min-width: 500px;
+	transition: min-width .5s linear;
+	-webkit-transition: min-width .5s linear; /* Safari */
+	-moz-transition: min-width .5s linear;
+	-o-transition: min-width .5s linear;
+	-ms-transition: min-width .5s linear;
+}
+
+.activCol .dictCitation{
+	overflow-y: visible;
+	max-height: auto;
+}
+
+.dictCitation::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.dictCitation{
+	font-weight: 100;
+	font-size: .5em;
+	margin-top:1em;
+	margin-bottom:2em;
+	hyphens: auto;
+	text-align: left;
+	padding:0;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.dictCitation img{
+	max-width: 100%;
+}
+
+.dictCitation .credits{
+	display: block;
+	margin-top:1em;
+	font-size: 0.7em;
+	font-weight: 200;
+	word-wrap: break-word;
+}
+
+.dictCitation .tag{
+	color:white;
+	background-color: black;
+	margin-right:0.5em;
+	word-wrap: initial;
+	display: inline-block;
+	margin-top: 0.5em;
+	padding:0.5em;
+}
