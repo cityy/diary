@@ -17,7 +17,7 @@
 - implement custom subjective user filters (e.g. for managing projects or major categories)
 
 ## How to use
-You will need at least python 3.6 installed.
+You will need at least python 3.6 installed. Also yattag and pyqt5.
 
 Currently there is no real proper concept for setting up **diary**. Just clone the repo and hit up ui_entryMaker.pyw. Entries are added from here.
-Any data will be stored inside a */data/* folder inside the repo. HTML files will be generated in */output/*. Access the references display through */output/index.html*. 
+Any data will be stored inside a */data/* folder inside the repo. HTML files will be generated in */output/*. Access the references display through */output/index.html*.

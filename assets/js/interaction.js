@@ -1,4 +1,10 @@
 var init = function(){
+
+		// scroll beyond filters
+		setTimeout(function () {
+            window.scrollTo(0, 600);
+        },1);
+
 	var filterTags = document.getElementsByClassName('filterTag');
 	var dictEntries = document.getElementsByClassName('dictWord');
 	var dictLetters = document.getElementsByClassName('dictLetter');

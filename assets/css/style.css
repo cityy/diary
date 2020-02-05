@@ -10,10 +10,13 @@
 	font-weight: 100;
 }
 
+/*html{ height: 100%; overflow:auto; }*/
+
 body{
 	font-family: bell-gothic;
 	font-weight: 200;
     overflow-x: hidden;
+    height: 100%;
 }
 
 a, a:visited{
@@ -42,6 +45,8 @@ a, a:visited{
 	overflow-y: scroll;
 	max-height: 600px;
 	padding-bottom: 0.5em;
+	border-bottom: 10px solid white;
+
 }
 
 #dictFilter::-webkit-scrollbar {
@@ -60,7 +65,20 @@ a, a:visited{
 	font-size: 0.6em;
 }
 
-#dictFilter form span.filterTag, #dictFilter span.viewTag{
+#dictFilter .titleTag{
+	display:inline;
+	color:white;
+	background-color: black;
+	border:1px solid black;
+	margin: 0;
+	word-wrap: break-word;
+	padding:0.3em;
+	font-weight: 200;
+	cursor: pointer;
+	float:left;
+}
+
+#dictFilter form span.filterTag, #dictFilter span.displayTag{
 	display:inline;
 	color:black;
 	background-color: white;
@@ -73,7 +91,7 @@ a, a:visited{
 	float:left;
 }
 
-#dictFilter form span.filterTag.active, #dictFilter span.viewTag.active{
+#dictFilter form span.filterTag.active, #dictFilter span.displayTag.active{
 	background-color: black;
 	color:white;
 }
